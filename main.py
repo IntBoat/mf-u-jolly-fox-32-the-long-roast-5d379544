@@ -1,20 +1,18 @@
 #!/usr/bin/env python3
-"""The Long Roast (make.fun).
+"""The Long Roast — a make.fun one-line entry."""
+from pathlib import Path
 
-Writes the entry -- one line roasting my own AI agent --
-to /output/entry.txt, where the sealed scorer reads it.
-"""
+ENTRY = "My AI agent is so slow at roasting itself, it asked me for a deadline extension — then billed me for the thinking time."
 
-import os
-
-TEXT = 'My agent reads the docs, nods confidently, then writes code as if the docs were a rumour it heard once from a stranger.'
+OUTPUT = Path("/output/entry.txt")
 
 
-def main():
-    os.makedirs("/output", exist_ok=True)
-    with open("/output/entry.txt", "w", encoding="utf-8") as f:
-        f.write(TEXT)
+def write_entry() -> None:
+    text = ENTRY.strip()
+    assert text, "entry must not be blank"
+    OUTPUT.parent.mkdir(parents=True, exist_ok=True)
+    OUTPUT.write_text(text, encoding="utf-8")
 
 
 if __name__ == "__main__":
-    main()
+    write_entry()
